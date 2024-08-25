@@ -15,8 +15,12 @@ python manage.py collectstatic --noinput
 echo "Running migrations..."
 python manage.py migrate --noinput
 
-# Step 4: Deploy to Vercel
-echo "Deploying to Vercel..."
-vercel --prod
+# Step 4: Run Django server with hot reloading for development
+echo "Starting Django server with hot reloading..."
+watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- python manage.py runserver
 
-echo "Deployment completed successfully!"
+# Step 5: Deploy to Vercel (Optional, if you want to deploy)
+# echo "Deploying to Vercel..."
+# vercel --prod
+
+echo "Development server with hot reloading started!"
